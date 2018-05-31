@@ -13,4 +13,4 @@ class Config(object):
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None # allows encrypted connections
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['emmmarosewalker@gmail.com']
+    ADMINS = ['example@example.com']
