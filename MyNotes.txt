@@ -229,6 +229,17 @@ Previously, we needed the app as a global variable in order to use @app
 as a decorator. Now that we have blueprints, we no longer require the global 
 variable. 
 
+
+-------------------------------------
+REQUIREMENTS FILE
+-------------------------------------
+A file containing all the dependencies for your project, so you do not need 
+to remember them all. Just run:
+    (venv) $ pip freeze > requirements.txt
+And the file will automatically be produced.
+To install the dependencies:
+    (venv) $ pip install -r requirements.txt
+
 -------------------------------------
 PRINCIPLES OF REST APIs
 -------------------------------------
@@ -295,3 +306,26 @@ API DESIGN OUTLINE
 HTTP METHOD        RESOURCE URL         NOTES
 ___________________________________________________________________
 GET                /api/users/<id>      Returns a user
+GET                /api/users           Returns a collection of all users
+POST               /api/users/<id>      Adds a new user
+PUT                /api/users/<id>      Modify a user
+
+JSON Representation of GET to /api/users/<id>
+{
+    "id":123,
+    "username":"john",
+    "email":"john@email.com",
+    "address":"12 Fake St. Sydney"
+}
+
+JSON Representation of GET to /api/users
+
+{
+    "items": [
+        {...user...},
+        {...user...}
+    ],
+    "_meta": {
+        "total_items": 3
+    }
+}
