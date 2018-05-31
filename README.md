@@ -26,6 +26,7 @@ PROJECT AND DATABASE SETUP
     # import packages in python interactive shell to confirm import successful
     ```
 5. Create folders and files as above structure
+```
     appname.py :
         Contains just 'from app import app', just acts as main portal to the app
         Make sure to run (venv) $ export FLASK_APP=appname.py so that 'flask run'
@@ -39,7 +40,9 @@ PROJECT AND DATABASE SETUP
         See Flask-SQLAlchemy docs for implementation details
     routes.py:
         Creates routes using @app.route('/') flask decorators. Requires app and flask modules
+```
 6. Setup __init__.py
+```
     Imports:
         from flask import Flask
         from flask_sqlalchemy import SQLAlchemy
@@ -50,6 +53,7 @@ PROJECT AND DATABASE SETUP
     Instantiate Migrate
     Bottom Imports:
         from app import models, routes
+```
 7. Database
 ```
     First, set up SQLAlchemy config in config.py
@@ -98,9 +102,9 @@ PROJECT AND DATABASE SETUP
     Rather than having to import modules to test the application, we can use the flask shell
     The purpose of this command is to start a Python interpreter in the context of the application
     To use:
-        (venv) $ flask shell
+        `(venv) $ flask shell
         >>> app
-        <Flask 'app'>
+        <Flask 'app'>`
     To add db instance and models to the flask shell, add this to appname.py:
         ```python
         
