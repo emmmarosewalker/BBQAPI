@@ -16,14 +16,15 @@ PROJECT AND DATABASE SETUP
 -------------------------------------
 1. Create project folder
 2. Create venv:
-    python3 -m venv venv
+    ```python3 -m venv venv```
 3. Activate venv:
-    source venv/bin/activate
+    ```source venv/bin/activate```
 4. Use pip to install packages:
-    pip3 install flask
+    ```pip3 install flask
     pip3 install flask-sqlalchemy
     pip3 install flask-migrate
     # import packages in python interactive shell to confirm import successful
+    ```
 5. Create folders and files as above structure
     appname.py :
         Contains just 'from app import app', just acts as main portal to the app
@@ -50,6 +51,7 @@ PROJECT AND DATABASE SETUP
     Bottom Imports:
         from app import models, routes
 7. Database
+```
     First, set up SQLAlchemy config in config.py
         SQLALCHEMY_DATABASE_URI = ...
         and SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -91,6 +93,7 @@ PROJECT AND DATABASE SETUP
             >>> User.query.order_by(User.username.desc()).all()
             [<User susan>, <User john>]
         For more queries see: http://flask-sqlalchemy.pocoo.org/2.3/queries/#querying-records
+ ```
 8. Make life easier using flask shell
     Rather than having to import modules to test the application, we can use the flask shell
     The purpose of this command is to start a Python interpreter in the context of the application
