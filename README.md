@@ -2,6 +2,7 @@
 -------------------------------------
 PROJECT STRUCTURE WHEN FIRST CREATED
 -------------------------------------
+```
 main_app_folder/
 |-- appname.py
 |-- config.py
@@ -9,7 +10,7 @@ main_app_folder/
     |------ __init__.py
     |------ models.py
     |------ routes.py
-
+```
 -------------------------------------
 PROJECT AND DATABASE SETUP
 -------------------------------------
@@ -98,6 +99,8 @@ PROJECT AND DATABASE SETUP
         >>> app
         <Flask 'app'>
     To add db instance and models to the flask shell, add this to appname.py:
+        ```python
+        
         from app import app, db
         from app.models import User, Post
 
@@ -108,6 +111,7 @@ PROJECT AND DATABASE SETUP
                 'User': User,
                 'Post': Post
                 }
+        ```
     Update as required.
     The reason the function returns a dictionary and not a list is that for each item 
     you have to also provide a name under which it will be referenced in the shell, 
@@ -125,16 +129,18 @@ Debug Mode:
         - Now error messages will be more meaningful. Don't forget to switch out of Debug mode for production
         - If you run flask run while in debug mode, you can then work on your application and any time you 
         save a file, the application will restart to pick up the new code.
-Create debug module:
-    Location:
-        app/errors.py
-Modules required:
+```python
+#Create debug module:
+    #Location:
+        #app/errors.py
+#Modules required:
     from flask import render_template
     from app import app, db
-Syntax:
+#Syntax:
     @app.errorhandler(404)
     def not_found_error(error):
         return render_template('template_name.html'), 404
+ ```
 Continue to add for each error code.
 **** Note **** for 500 error, which could be a database error, we need to rollback the database
 so that any subsequent db accesses are not interfered with. To do this:
@@ -147,6 +153,7 @@ ERROR LOGGING WITH EMAIL
 *** NOTE GMAIL USED FOR SIMPLICITY ***
 Own email server should be set up for production, however this is time-consuming and tedious
 1. Configure the email settings in Config class:
+    ```python
     class Config(object):
     ...
         MAIL_SERVER = os.environ.get('MAIL_SERVER')
@@ -155,7 +162,9 @@ Own email server should be set up for production, however this is time-consuming
         MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
         MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
         ADMINS = ['your-email@example.com']
+    ```
 2. Set up the logging methods in __init__:
+    ```python
     Imports (logging module, and SMTPHandler from logging handlers):
     import logging
     from logging.handlers import SMTPHandler
@@ -178,6 +187,7 @@ Own email server should be set up for production, however this is time-consuming
                 secure=secure)
             mail_handler.setLevel(logging.ERROR) # only report errors, not warnings or debug msgs
             app.logger.addHandler(mail_handler)
+     ```
 
 -------------------------------------
 BLUEPRINTS
@@ -204,20 +214,23 @@ To create a blueprint:
     ** Be sure to change render_template() to use the new sub-directory
 2. In the app/errors folder, create an __init__.py file. This will 
     contain the blueprint creation.
+    ```python
     from flask import blueprint
     bp = Blueprint('errors', __name__)
     from app.errors import (any python files e.g. handlers)
+    ```
     ** The Blueprint class takes the name of the blueprint, the name 
     of the base module (normally __name__) and some optional arguments 
     not included here. 
     ** import modules at the bottom to avoid circular dependencies 
+    
 3. Finally, register the blueprint with the application:
     in app/__init__.py:
+    ```python
     # ... other code here
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
-    # ...
-    # remove errors from bottom imports
+    ```
 
 
 -------------------------------------
@@ -311,7 +324,8 @@ GET                /api/users           Returns a collection of all users
 POST               /api/users/<id>      Adds a new user
 PUT                /api/users/<id>      Modify a user
 
-JSON Representation of GET to /api/users/<id>
+```javascript
+// JSON Representation of GET to /api/users/<id>
 {
     "id":123,
     "username":"john",
@@ -319,7 +333,7 @@ JSON Representation of GET to /api/users/<id>
     "address":"12 Fake St. Sydney"
 }
 
-JSON Representation of GET to /api/users
+// JSON Representation of GET to /api/users
 
 {
     "items": [
@@ -330,3 +344,4 @@ JSON Representation of GET to /api/users
         "total_items": 3
     }
 }
+```
