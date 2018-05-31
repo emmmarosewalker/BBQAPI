@@ -1,0 +1,16 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - App</title>
+        {% else %}
+        <title>App</title>
+        {% endif %}
+    </head>
+    <body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">Home</a>
+        <hr>
+    </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>
